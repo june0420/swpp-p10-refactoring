@@ -1,6 +1,13 @@
 # TODO: 1. Use one-liners
-def count_asterisk_exceed_five(text):
-    return text.count("*") > 5
+#def count_asterisk_exceed_five(text):
+#    return text.count("*") > 5
+
+def censor_alert(text, word, replaced_char, alert_num):
+    while word in text:
+        text = text[:text.find(word)] + replaced_char * len(word) + text[text.find(word) + len(word):]
+    if text.count(replaced_char) > alert_num:
+        print("More than " + str(alert_num) + " " + replaced_char)
+    return text
 
 if __name__ == "__main__":
     text = """Because he's the hero Gotham deserves but not the one it needs right now.
@@ -15,23 +22,11 @@ He is a silent guardian, a watchful protector... a dark knight."""
 
     # TODO: 2. Extract method, remove duplicated code
     # Censor `word1` from `text`
-    tmp = text
-    while word1 in tmp:
-        tmp = tmp[:tmp.find(word1)] + "*" * len(word1) + tmp[tmp.find(word1) + len(word1):]
-    text = tmp
-
-    if count_asterisk_exceed_five(text):
-        print("More than five *")
+    text = censor_alert(text, word1, '*', 5)
 
     # TODO: 2. Extract method, remove duplicated code
     # Censor `word2` from `text`
-    tmp = text
-    while word2 in tmp:
-        tmp = tmp[:tmp.find(word2)] + "*" * len(word2) + tmp[tmp.find(word2) + len(word2):]
-    text = tmp
-
-    if count_asterisk_exceed_five(text):
-        print("More than five *")
+    text = censor_alert(text, word2, '*', 5)
 
     # Print result `text`
     print(text)
